@@ -1,0 +1,4 @@
+packages:
+    - "backend/*"
+    - "backend/common"
+    - "frontend"

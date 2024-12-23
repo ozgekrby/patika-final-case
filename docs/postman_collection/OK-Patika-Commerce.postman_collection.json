@@ -1,0 +1,1623 @@
+{
+	"info": {
+		"_postman_id": "7b180c20-de15-4079-b634-5b6eaf9c4b52",
+		"name": "OK-Patika-Commerce",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "37879624"
+	},
+	"item": [
+		{
+			"name": "Commerce Backend",
+			"item": [
+				{
+					"name": "Account",
+					"item": [
+						{
+							"name": "Update",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Update successful\", function () {",
+											"  var jsonData = pm.response.json();",
+											"  pm.expect(jsonData.success).to.be.true;",
+											"   if (jsonData.data.token) {",
+											"    pm.environment.set(\"auth_token\", jsonData.data.token);",
+											"  }",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjcyNjFmNWRmMjEzZGM1ZTc4NjY5OSIsImVtYWlsIjoidGVzdHVzZXJAZW1haWwuY29tIiwibmFtZSI6InRlc3R1c2VyIiwicm9sZXMiOlsidXNlciIsImFkbWluIl0sImlhdCI6MTczNDgxMzY4MywiZXhwIjoxNzM0OTAwMDgzfQ.JbGeBP-fbvGQRfKkYQDZGVVVENixjzSpXWzBZ14HY04",
+											"type": "string"
+										}
+									]
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\" : \"testuser8\",\n    \"email\" : \"testuser@email.com\",\n    \"password\": \"123456\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/admin/account/update",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"admin",
+										"account",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Profile",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY3NjcyNjFmNWRmMjEzZGM1ZTc4NjY5OSIsImVtYWlsIjoidGVzdHVzZXJAZW1haWwuY29tIiwibmFtZSI6InRlc3R1c2VyOCIsInJvbGVzIjpbImFkbWluIl0sImlhdCI6MTczNDgxNDUyMSwiZXhwIjoxNzM0OTAwOTIxfQ.SWY8R9pdqiNw-TyHvm1j2Zx7Lhakk3rfh_fcUDCry3o",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/admin/account/profile",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"admin",
+										"account",
+										"profile"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Orders",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/orders",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Order",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/orders/67652743b5c944bbe9e40561",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"orders",
+										"67652743b5c944bbe9e40561"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Order",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/account/create-order",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"account",
+										"create-order"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{auth_token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Auth",
+					"item": [
+						{
+							"name": "Register",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"name\": \"{{user_name}}\",\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/auth/register",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"auth",
+										"register"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Login",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Login successful\", function () {",
+											"  var jsonData = pm.response.json();",
+											"  pm.expect(jsonData.success).to.be.true;",
+											"  pm.environment.set(\"user_id\", jsonData.data.user.id);",
+											"  pm.environment.set(\"user_name\", jsonData.data.user.name);",
+											"  pm.environment.set(\"user_email\", jsonData.data.user.email);",
+											"  pm.environment.set(\"auth_token\", jsonData.data.token);",
+											"});",
+											"",
+											"pm.test(\"Login failed\", function () {",
+											"  var jsonData = pm.response.json();",
+											"  pm.expect(jsonData.success).to.be.false;",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"email\": \"{{user_email}}\",\n  \"password\": \"{{user_password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/auth/login",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Logout",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/auth/logout",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"auth",
+										"logout"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Cart",
+					"item": [
+						{
+							"name": "Add To Cart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"product\": \"676426f71727b8c4f6463419\",\n  \"quantity\": \"40\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/cart/add",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"cart",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Clear",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/cart/clear",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"cart",
+										"clear"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Remove",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/cart/remove/676426f71727b8c4f6463419",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"cart",
+										"remove",
+										"676426f71727b8c4f6463419"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Cart",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{auth_token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/cart",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"cart"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Product",
+					"item": [
+						{
+							"name": "Get By Slug",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/products/detail/67641846019b4eea1448cafd",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"products",
+										"detail",
+										"67641846019b4eea1448cafd"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Search",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_commerce_api}}/products/search?q=Samp",
+									"host": [
+										"{{ok_patika_commerce_api}}"
+									],
+									"path": [
+										"products",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "Samp"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Administrator",
+					"item": [
+						{
+							"name": "User",
+							"item": [
+								{
+									"name": "Update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Update successful\", function () {",
+													"  var jsonData = pm.response.json();",
+													"  pm.expect(jsonData.success).to.be.true;",
+													"   if (jsonData.data.token) {",
+													"    pm.environment.set(\"auth_token\", jsonData.data.token);",
+													"  }",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\" : \"test1\",\n    \"email\" : \"testuser1111@email.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/users/update/6763cd31768e2f672fb0ac1a",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"users",
+												"update",
+												"6763cd31768e2f672fb0ac1a"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "List",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Update successful\", function () {",
+													"  var jsonData = pm.response.json();",
+													"  pm.expect(jsonData.success).to.be.true;",
+													"   if (jsonData.data.token) {",
+													"    pm.environment.set(\"auth_token\", jsonData.data.token);",
+													"  }",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/users",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"users"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detail",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Update successful\", function () {",
+													"  var jsonData = pm.response.json();",
+													"  pm.expect(jsonData.success).to.be.true;",
+													"   if (jsonData.data.token) {",
+													"    pm.environment.set(\"auth_token\", jsonData.data.token);",
+													"  }",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/users/detail/67630392c7150170a175982e",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"users",
+												"detail",
+												"67630392c7150170a175982e"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"packages": {},
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Order",
+							"item": [
+								{
+									"name": "Order List",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/orders",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"orders"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Product",
+							"item": [
+								{
+									"name": "Create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"999999994\",\n  \"description\": \"This is a sample product description.\",\n  \"category\": \"67641846019b4eea1448cafd\",\n  \"price\": 99.99,\n  \"discountPercentage\": 10,\n  \"stockQuantity\": 50,\n  \"thumbnail\": \"http://example.com/thumbnail.jpg\",\n  \"images\": [\n    \"http://example.com/image1.jpg\",\n    \"http://example.com/image2.jpg\"\n  ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/products/create",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"products",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"Sample Product 98\",\n  \"description\": \"This is a sample product description.\",\n  \"category\": \"67641846019b4eea1448cafd\",\n  \"price\": 99.99,\n  \"discountPercentage\": 10,\n  \"stockQuantity\": 50\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/products/update/67646cb6734516fc0b4e124c",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"products",
+												"update",
+												"67646cb6734516fc0b4e124c"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/products/delete/1231654654",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"products",
+												"delete",
+												"1231654654"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detail",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/products/detail/1231654654",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"products",
+												"detail",
+												"1231654654"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "List",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/products",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"products"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Category",
+							"item": [
+								{
+									"name": "Create",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"Sample Category\",\n  \"description\": \"This is a sample category description.\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/categories/create",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"categories",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Update",
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"title\": \"Updated Category Title\",\n  \"description\": \"This is an updated category description.\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/categories/update/67641846019b4eea1448cafd",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"categories",
+												"update",
+												"67641846019b4eea1448cafd"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Delete",
+									"request": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/categories/delete/6764177afbe3c462422b08f2",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"categories",
+												"delete",
+												"6764177afbe3c462422b08f2"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Detail",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/categories/detail/67641846019b4eea1448cafd",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"categories",
+												"detail",
+												"67641846019b4eea1448cafd"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "List",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/categories",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"categories"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Account",
+							"item": [
+								{
+									"name": "Update",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Update successful\", function () {",
+													"  var jsonData = pm.response.json();",
+													"  pm.expect(jsonData.success).to.be.true;",
+													"   if (jsonData.data.token) {",
+													"    pm.environment.set(\"auth_token\", jsonData.data.token);",
+													"  }",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\" : \"testuser9\",\n    \"email\" : \"testuser@email.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/account/update",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"account",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Profile",
+									"protocolProfileBehavior": {
+										"disableBodyPruning": true
+									},
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"email\" : \"testuser@email.com\",\n    \"password\": \"123456\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{ok_patika_commerce_api}}/admin/account/profile",
+											"host": [
+												"{{ok_patika_commerce_api}}"
+											],
+											"path": [
+												"admin",
+												"account",
+												"profile"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{auth_token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Check API",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{ok_patika_commerce_api}}/",
+							"host": [
+								"{{ok_patika_commerce_api}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							"pm.environment.set(\"email\", \"testuser@email.com\");",
+							"pm.environment.set(\"password\", \"123456\");"
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Invoice Service",
+			"item": [
+				{
+					"name": "Invoice",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderId\" : \"xxxx\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_invoice_api}}/invoices/create",
+									"host": [
+										"{{ok_patika_invoice_api}}"
+									],
+									"path": [
+										"invoices",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Cancel",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_invoice_api}}/invoices/cancel/1234564",
+									"host": [
+										"{{ok_patika_invoice_api}}"
+									],
+									"path": [
+										"invoices",
+										"cancel",
+										"1234564"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Send",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_invoice_api}}/invoices/send/1234564",
+									"host": [
+										"{{ok_patika_invoice_api}}"
+									],
+									"path": [
+										"invoices",
+										"send",
+										"1234564"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_invoice_api}}/invoices/detail/xxxxx",
+									"host": [
+										"{{ok_patika_invoice_api}}"
+									],
+									"path": [
+										"invoices",
+										"detail",
+										"xxxxx"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_invoice_api}}/invoices",
+									"host": [
+										"{{ok_patika_invoice_api}}"
+									],
+									"path": [
+										"invoices"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Download",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_invoice_api}}/invoices/download/xxxxx",
+									"host": [
+										"{{ok_patika_invoice_api}}"
+									],
+									"path": [
+										"invoices",
+										"download",
+										"xxxxx"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{auth_token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payment Service",
+			"item": [
+				{
+					"name": "Payment",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"orderId\" : \"67652743b5c944bbe9e40561\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{ok_patika_payment_api}}/payments/create",
+									"host": [
+										"{{ok_patika_payment_api}}"
+									],
+									"path": [
+										"payments",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Detail",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_payment_api}}/payments/detail/67656ec7ad762b6f5540a403",
+									"host": [
+										"{{ok_patika_payment_api}}"
+									],
+									"path": [
+										"payments",
+										"detail",
+										"67656ec7ad762b6f5540a403"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "By Order",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_payment_api}}/payments/by-order/67652743b5c944bbe9e40561",
+									"host": [
+										"{{ok_patika_payment_api}}"
+									],
+									"path": [
+										"payments",
+										"by-order",
+										"67652743b5c944bbe9e40561"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "List",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{ok_patika_payment_api}}/payments",
+									"host": [
+										"{{ok_patika_payment_api}}"
+									],
+									"path": [
+										"payments"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"auth": {
+						"type": "bearer",
+						"bearer": [
+							{
+								"key": "token",
+								"value": "{{auth_token}}",
+								"type": "string"
+							}
+						]
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"packages": {},
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.environment.set(\"user_name\", \"testuser\");",
+					"pm.environment.set(\"user_email\", \"testuser@email.com\");",
+					"pm.environment.set(\"user_password\", \"123456\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

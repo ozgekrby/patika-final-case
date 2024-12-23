@@ -1,0 +1,143 @@
+services:
+    commerce:
+        build:
+            context: .
+            dockerfile: backend/commerce/Dockerfile
+        container_name: ok-backend-commerce
+        ports:
+            - "3010:3010"
+        environment:
+            - MONGO_URI=mongodb://ok-mongo:27017/ecommerce
+            - REDIS_HOST=ok-redis
+            - KAFKA_BROKER=ok-kafka:9092
+            - ELASTICSEARCH_HOST=http://ok-elasticsearch:9200
+            - MAILER_AUTH_USER=dev.okar.test@gmail.com
+            - MAILER_AUTH_PASSWORD=123456
+            - INVOICE_SERVICE_API_URL=http://ok-backend-invoice-service:3020/api
+            - PAYMENT_SERVICE_API_URL=http://ok-backend-payment-service:3030/api
+       # volumes:
+       #      - ./backend/commerce:/usr/src/app/backend/commerce
+       #      - ./backend/common:/usr/src/app/backend/common
+        depends_on:
+            - redis
+            - mongo
+            - kafka
+            - elasticsearch
+            - zookeeper
+
+    invoice-service:
+        build:
+            context: .
+            dockerfile: backend/invoice-service/Dockerfile
+        container_name: ok-backend-invoice-service
+        ports:
+            - "3020:3020"
+        environment:
+            - MONGO_URI=mongodb://ok-mongo:27017/ecommerce
+            - REDIS_HOST=ok-redis
+            - KAFKA_BROKER=ok-kafka:9092
+            - ELASTICSEARCH_HOST=http://ok-elasticsearch:9200
+            - MAILER_AUTH_USER=dev.okar.test@gmail.com
+            - MAILER_AUTH_PASSWORD=123456
+            - COMMERCE_API_URL=http://ok-backend-commerce:3010/api
+            - PAYMENT_SERVICE_API_URL=http://ok-backend-payment-service:3030/api
+       #  volumes:
+       #      - ./backend/invoice-service:/usr/src/app/backend/invoice-service
+       #      - ./backend/common:/usr/src/app/backend/common
+        depends_on:
+            - mongo
+            - redis
+            - kafka
+
+    payment-service:
+        build:
+            context: .
+            dockerfile: backend/payment-service/Dockerfile
+        container_name: ok-backend-payment-service
+        ports:
+            - "3030:3030"
+        environment:
+            - MONGO_URI=mongodb://ok-mongo:27017/ecommerce
+            - REDIS_HOST=ok-redis
+            - KAFKA_BROKER=ok-kafka:9092
+            - ELASTICSEARCH_HOST=http://ok-elasticsearch:9200
+            - MAILER_AUTH_USER=dev.okar.test@gmail.com
+            - MAILER_AUTH_PASSWORD=123456
+            - COMMERCE_API_URL=http://ok-backend-commerce:3010/api
+            - INVOICE_SERVICE_API_URL=http://ok-backend-invoice-service:3020/api
+       #  volumes:
+       #      - ./backend/payment-service:/usr/src/app/backend/payment-service
+       #      - ./backend/common:/usr/src/app/backend/common
+        depends_on:
+            - mongo
+            - redis
+            - kafka
+
+    mongo:
+        image: mongo:latest
+        container_name: ok-mongo
+        ports:
+            - "27018:27017"
+        volumes:
+            - mongo-data:/data/db
+
+    redis:
+        image: redis:latest
+        container_name: ok-redis
+        ports:
+            - "6380:6379"
+
+    elasticsearch:
+        image: docker.elastic.co/elasticsearch/elasticsearch:8.17.0
+        container_name: ok-elasticsearch
+        environment:
+            - discovery.type=single-node
+            - xpack.security.enabled=false
+        ports:
+            - "9201:9200"
+            - "9301:9300"
+        deploy:
+            resources:
+                limits:
+                    memory: 2g
+
+    kafka:
+        image: bitnami/kafka:latest
+        container_name: ok-kafka
+        ports:
+            - "9093:9092"
+        environment:
+            - KAFKA_BROKER_ID=1
+            - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+            - ALLOW_PLAINTEXT_LISTENER=yes
+        depends_on:
+            - zookeeper
+
+    zookeeper:
+        image: bitnami/zookeeper:latest
+        container_name: ok-zookeeper
+        ports:
+            - "2182:2181"
+        environment:
+            - ALLOW_ANONYMOUS_LOGIN=yes
+
+    frontend:
+        build:
+            context: .
+            dockerfile: frontend/Dockerfile
+        container_name: ok-frontend
+        ports:
+            - "3000:3000"
+        environment:
+            - VITE_COMMERCE_API=http://localhost:3010/api
+            - VITE_INVOICE_API=http://localhost:3020/api
+            - VITE_PAYMENT_API=http://localhost:3030/api
+       #  volumes:
+       #      - ./frontend:/usr/src/app/frontend
+
+volumes:
+    mongo-data:
+
+networks:
+    default:
+        driver: bridge

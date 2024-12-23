@@ -1,0 +1,30 @@
+{
+  "name": "ok-backend-payment-service",
+  "version": "1.0.0",
+  "description": "Özge Karabay | Ecommerce Backend Payment Service",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development node index.js",
+    "watch": "NODE_ENV=development nodemon index.js"
+  },
+  "engines": {
+    "node": "22.12.0"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "5.0.1",
+    "kafkajs": "^2.2.4",
+    "mongoose": "^8.9.1",
+    "morgan": "^1.10.0",
+    "nodemon": "^3.1.9",
+    "ok-backend-common": "workspace:*",
+    "stripe": "^17.5.0"
+  }
+}
